@@ -1,5 +1,6 @@
 package spacegamecraft.player;
 
+import spacegamecraft.InputHandler;
 import spacegamecraft.geo.Point;
 import spacegamecraft.gfx.Buffer;
 import spacegamecraft.gfx.Color;
@@ -14,12 +15,31 @@ public class Player {
 	}
 	
 	public Buffer draw(Buffer buf) {
-		buf.pixels[loc.x][loc.y] = color;
-		buf.pixels[loc.x+1][loc.y] = color;
-		buf.pixels[loc.x][loc.y+1] = color;
-		buf.pixels[loc.x+1][loc.y+1] = color;
+		try {
+			buf.pixels[loc.x][loc.y] = color;
+			buf.pixels[loc.x+1][loc.y] = color;
+			buf.pixels[loc.x][loc.y+1] = color;
+			buf.pixels[loc.x+1][loc.y+1] = color;
+		} catch (Exception e) {
+			System.out.println("Out of bounds");
+		}
 
 		return buf;
+	}
+	
+	public void handleKey(InputHandler input) {
+		if(input.keys[39]) {
+			moveRight();
+		}
+		if(input.keys[38]) {
+			moveUp();
+		}
+		if(input.keys[37]) {
+			moveLeft();
+		}
+		if(input.keys[40]) {
+			moveDown();
+		}
 	}
 	
 	public void moveUp() {

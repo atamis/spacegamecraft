@@ -1,14 +1,18 @@
 package spacegamecraft.data;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import spacegamecraft.geo.Point;
+import spacegamecraft.gfx.Buffer;
 import spacegamecraft.gfx.Color;
 
 public class System {
 	
 	public static final int SYSTEM_COLOR = 0xdba92b;
 	public static final int MAX_SYSTEM_SIZE = 3;
+	public static final int TWINKLE_COLOR = 0x222222;
+
 	
 	public int system_size;
 	
@@ -45,5 +49,20 @@ public class System {
 		case 2: return SYSTEM_COLOR;
 		}
 		return SYSTEM_COLOR;
+	}
+	/**
+	 * Draws a system onto the large star map.
+	 * @param point representing the corner of the chunk this system is in.
+	 * @param buf, the buffer to draw on
+	 * @return the modified buffer
+	 */
+	public Buffer draw(Point point, Buffer buf) {
+		Point p = point.add(loc);
+		buf.pixels[p.x][p.y] = systemColor();
+		for(int i=0; i < objects.size(); i++){
+			p = p.add(0, 1);
+			buf = objects.get(i).draw(p, buf);
+		}
+		return buf;
 	}
 }

@@ -1,6 +1,7 @@
 package spacegamecraft.data;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import spacegamecraft.geo.Point;
 import spacegamecraft.gfx.Buffer;
@@ -40,9 +41,7 @@ public class GalaxyChunk {
 
 	public Buffer draw(Point point, Buffer buf) {
 		for(int i=0; i < systems.size(); i++) {
-			System sys = systems.get(i);
-			Point abs_loc = loc.scale(CHUNK_SIZE).add(point).add(sys.loc).scale(2);
-			buf.pixels[abs_loc.x][abs_loc.y] = sys.systemColor();
+			buf = systems.get(i).draw(loc.scale(CHUNK_SIZE).add(point), buf);
 		}
 		return buf;
 	}

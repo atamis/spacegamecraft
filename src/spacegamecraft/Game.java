@@ -30,6 +30,7 @@ public class Game extends Canvas implements Runnable {
 	private static final long serialVersionUID = 1L;
 	public boolean running;
 	public int ticks = 0;
+	public static int SCALE = 2;
 	public static int WIDTH = 320;
 	public static int HEIGHT = 480;
 	public BufferedImage buffer = new BufferedImage(HEIGHT, WIDTH, BufferedImage.TYPE_INT_RGB);
@@ -37,7 +38,8 @@ public class Game extends Canvas implements Runnable {
 	public InputHandler input = new InputHandler(this);
 	public Player player = new Player(new Point(50, 50), 0x00ff00);//0x00ff00);
 	public int frames = 0;
-	public Galaxy chunk = LevelGen.generateGalaxy(10, 10, new Random(10));
+	public Galaxy galaxy = LevelGen.generateGalaxy(new Random(10));
+	public spacegamecraft.data.System nearest_system;
 
 	
 	public Game() {
@@ -57,9 +59,9 @@ public class Game extends Canvas implements Runnable {
 		System.out.println(Integer.toString(Color.blue(0xabcdef), 16));
 
 		Game game = new Game();
-		game.setMinimumSize(new Dimension(HEIGHT*2, WIDTH*2));
-		game.setMaximumSize(new Dimension(HEIGHT*2, WIDTH*2));
-		game.setPreferredSize(new Dimension(HEIGHT*2, WIDTH*2));
+		game.setMinimumSize(new Dimension(HEIGHT*SCALE, WIDTH*SCALE));
+		game.setMaximumSize(new Dimension(HEIGHT*SCALE, WIDTH*SCALE));
+		game.setPreferredSize(new Dimension(HEIGHT*SCALE, WIDTH*SCALE));
 		
 		JFrame frame = new JFrame(Game.NAME);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -81,7 +83,7 @@ public class Game extends Canvas implements Runnable {
 
 	@Override
 	public void run() {
-		System.out.println(chunk.toString());
+		System.out.println(galaxy.toString());
 		long lastTime = System.nanoTime();
 		double unprocessed = 0;
 		double nsPerTick = 1000000000.0 / 60;
@@ -129,18 +131,9 @@ public class Game extends Canvas implements Runnable {
 	}
 
 	private void tick() {
-		if(input.keys[39]) {
-			player.moveRight();
-		}
-		if(input.keys[38]) {
-			player.moveUp();
-		}
-		if(input.keys[37]) {
-			player.moveLeft();
-		}
-		if(input.keys[40]) {
-			player.moveDown();
-		}
+		ticks++;
+		nearest_system = galaxy.nearestSystem(player.loc);
+		player.handleKey(input);
 	}
 	
 	private void render() {
@@ -185,19 +178,24 @@ public class Game extends Canvas implements Runnable {
 									"How many have died when they might have lived.",
 									new Point(0, 200), 0xffffff, buf);*/
 
-		buf = chunk.draw(new Point(0, 0), buf);
+		buf = galaxy.draw(new Point(0, 0), buf);
 		
 		
 		buf.pixels[1][1] = Color.fromRGB(0, 0, 0xff);
 		
-		Buffer grey_buf = new Buffer(HEIGHT*2, WIDTH*2);
+		Buffer grey_buf = new Buffer(HEIGHT, WIDTH);
 		grey_buf.clear(Color.INVISIBLE);
 		grey_buf = player.draw(grey_buf);
 		grey_buf.pixels[100][100] = Color.fromRGB(100, 200, 50);
 		buf.replaceBuffer(grey_buf);
+		buf = Font.drawMessage(Integer.toString(frames), new Point(0, 0), 0xff0000, buf);
+
+		buf.pixels[nearest_system.loc.x][nearest_system.loc.y] = Color.fromRGB(0xff, 0, 0);
+		buf = Font.drawMessage("Nearest System "+ nearest_system.loc.toString(), new Point(320, 10), 0xffffff, buf);
+		buf = Font.drawMessage("Arrow keys to move the\ngreen square. The nearest\nsystem is highlighted in\nred", new Point(320, 30), 0xffffff, buf);
 		
-		
-		//buf = Blur.multiblur(buf, 4);
+		// Flicker:
+		//buf = Blur.multiblur(buf, ticks%3);
 		
 		for(int x = 0; x < buf.pixels.length; x++) {
 			for(int y = 0; y < buf.pixels[x].length; y++) {
@@ -211,7 +209,7 @@ public class Game extends Canvas implements Runnable {
 		}
 
 		Graphics g = bs.getDrawGraphics();
-		g.drawImage(buffer.getScaledInstance(HEIGHT*2, WIDTH*2, Image.SCALE_AREA_AVERAGING), 0, 0, null);
+		g.drawImage(buffer.getScaledInstance(HEIGHT*SCALE, WIDTH*SCALE, Image.SCALE_AREA_AVERAGING), 0, 0, null);
 		g.dispose();
 		bs.show();
 	}

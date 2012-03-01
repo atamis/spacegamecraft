@@ -30,4 +30,8 @@ public class Point {
 	public Point scale(int i) {
 		return new Point(x*i, y*i);
 	}
+
+	public double distance(Point p) {
+		return Math.sqrt(Math.pow(p.x-x, 2) + Math.pow(p.y-y, 2));
+	}
 }
