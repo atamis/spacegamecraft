@@ -27,9 +27,12 @@ public class System {
 	 */
 	public ArrayList<SpaceObject> objects;
 	
-	public System(Point loc, int system_size, ArrayList<SpaceObject> objects) {
+	public String name;
+	
+	public System(Point loc, int system_size, String name, ArrayList<SpaceObject> objects) {
 		this.loc = loc;
 		this.system_size = system_size;
+		this.name = name;
 		this.objects = objects;
 	}
 	
