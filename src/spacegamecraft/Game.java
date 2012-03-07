@@ -13,7 +13,7 @@ import javax.swing.JFrame;
 
 import spacegamecraft.data.Galaxy;
 import spacegamecraft.data.GalaxyChunk;
-import spacegamecraft.data.LevelGen;
+import spacegamecraft.data.gen.LevelGen;
 import spacegamecraft.geo.Point;
 import spacegamecraft.gfx.Background;
 import spacegamecraft.gfx.Blur;
@@ -191,8 +191,16 @@ public class Game extends Canvas implements Runnable {
 		buf = Font.drawMessage(Integer.toString(frames), new Point(0, 0), 0xff0000, buf);
 
 		buf.pixels[nearest_system.loc.x][nearest_system.loc.y] = Color.fromRGB(0xff, 0, 0);
-		buf = Font.drawMessage("Nearest System "+ nearest_system.loc.toString(), new Point(320, 10), 0xffffff, buf);
-		buf = Font.drawMessage("Arrow keys to move the\ngreen square. The nearest\nsystem is highlighted in\nred", new Point(320, 30), 0xffffff, buf);
+		buf = Font.drawMessage("Nearest System "+ nearest_system.loc.toString() + "\nName " + nearest_system.name, new Point(320, 10), 0xffffff, buf);
+		StringBuilder objects_string = new StringBuilder("Planets in nearest system: \n");
+		for(int i=0; i<nearest_system.objects.size(); i++) {
+			objects_string.append(nearest_system.objects.get(i).name + "\n");
+		}
+		
+		buf = Font.drawMessage(objects_string.toString(), new Point(320, 100), 0xffffff, buf);
+		
+		
+		buf = Font.drawMessage("Arrow keys to move the green square. The nearest\nsystem is highlighted in\nred. FPS is displayed in\nred at the top left.", new Point(320, 30), 0xffffff, buf);
 		
 		// Flicker:
 		//buf = Blur.multiblur(buf, ticks%3);
