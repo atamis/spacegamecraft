@@ -14,7 +14,11 @@ public class InputHandler implements KeyListener {
 
 	@Override
 	public void keyPressed(KeyEvent ke) {
-		keys[ke.getKeyCode()] = true;
+		int keycode = ke.getKeyCode();
+		if(!keys[keycode]) {
+			System.out.println(keycode);
+		}
+		keys[keycode] = true;
 	}
 
 	@Override
