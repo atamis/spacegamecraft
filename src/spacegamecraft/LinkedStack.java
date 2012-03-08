@@ -3,14 +3,6 @@ package spacegamecraft;
 
 
 public class LinkedStack<T> {
-	class Node<T> {
-		public T d;
-		public Node<T> n;
-		public Node(T d, Node<T> n){ 
-			this.d = d;
-			this.n = n;
-		}
-	}
 	public Node<T> root;
 	public int height;
 	public LinkedStack(T start) {
@@ -34,3 +26,11 @@ public class LinkedStack<T> {
 	}
 }
 
+class Node<T> {
+	public T d;
+	public Node<T> n;
+	public Node(T d, Node<T> n){ 
+		this.d = d;
+		this.n = n;
+	}
+}

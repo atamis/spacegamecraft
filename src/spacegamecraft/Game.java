@@ -12,11 +12,8 @@ import java.util.Random;
 import javax.swing.JFrame;
 
 import spacegamecraft.data.Galaxy;
-import spacegamecraft.data.GalaxyChunk;
 import spacegamecraft.data.gen.LevelGen;
 import spacegamecraft.geo.Point;
-import spacegamecraft.gfx.Background;
-import spacegamecraft.gfx.Blur;
 import spacegamecraft.gfx.Buffer;
 import spacegamecraft.gfx.Color;
 import spacegamecraft.gfx.Font;
