@@ -1,5 +1,7 @@
 package spacegamecraft.gfx;
 
+import java.util.Random;
+
 public class Color {
 	public static final int INVISIBLE = 0xabcde;
 	public static final int GREEN = Color.fromRGB(0, 0xff, 0);
@@ -21,5 +23,13 @@ public class Color {
 	
 	public static int blue(int x) {
 		return (int) ((x-red(x)*0x010000-green(x)*0x100));
+	}
+
+	public static int randColor(Random rand) {
+		return rand.nextInt(0xffffff);
+	}
+	
+	public static int randColor() {
+		return randColor(new Random());
 	}
 }

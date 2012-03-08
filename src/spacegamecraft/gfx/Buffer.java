@@ -65,4 +65,13 @@ public class Buffer {
 			}
 		}
 	}
+
+	public boolean set(int x, int y, int color) {
+		try {
+			pixels[x][y] = color;
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
 }

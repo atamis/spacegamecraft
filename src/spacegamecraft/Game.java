@@ -192,6 +192,9 @@ public class Game extends Canvas implements Runnable {
 
 		buf.pixels[nearest_system.loc.x][nearest_system.loc.y] = Color.fromRGB(0xff, 0, 0);
 		buf = Font.drawMessage("Nearest System "+ nearest_system.loc.toString() + "\nName " + nearest_system.name, new Point(320, 10), 0xffffff, buf);
+		if(nearest_system.owned()) {
+			buf = Font.drawMessage("[" + nearest_system.owner.name + "]", new Point(320, 22), nearest_system.owner.color, buf);
+		}
 		StringBuilder objects_string = new StringBuilder("Planets in nearest system: \n");
 		for(int i=0; i<nearest_system.objects.size(); i++) {
 			objects_string.append(nearest_system.objects.get(i).name + "\n");

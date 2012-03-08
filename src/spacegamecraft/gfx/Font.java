@@ -11,7 +11,7 @@ import spacegamecraft.geo.Point;
 public class Font {
 	public static final int character_width = 5; // Default: 5
 	public static final int character_height = 5; // Default: 5
-	static String chars = "abcdefghijklmnopqrstuvwxyz1234567890.,!";
+	static String chars = "abcdefghijklmnopqrstuvwxyz1234567890.,!'[]";
 	private static Font instance = null;
 	public BufferedImage fontImage;
 	

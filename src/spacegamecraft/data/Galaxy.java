@@ -9,9 +9,12 @@ public class Galaxy {
 	public static final int WIDTH = 300;
 	public static final int HEIGHT = 300;
 	public ArrayList<System> systems;
+	public ArrayList<Empire> empires;
+
 	
-	public Galaxy(ArrayList<System> systems) {
+	public Galaxy(ArrayList<System> systems, ArrayList<Empire> empires) {
 		this.systems = systems;
+		this.empires = empires;
 	}
 
 	public Buffer draw(Point point, Buffer buf) {
