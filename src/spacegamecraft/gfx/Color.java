@@ -2,6 +2,7 @@ package spacegamecraft.gfx;
 
 public class Color {
 	public static final int INVISIBLE = 0xabcde;
+	public static final int GREEN = Color.fromRGB(0, 0xff, 0);
 	public static int fromRGB(int r, int g, int b) {
 		int x = 0;
 		x = x + b;
