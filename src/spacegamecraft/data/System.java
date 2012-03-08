@@ -1,8 +1,6 @@
 package spacegamecraft.data;
 
 import java.util.ArrayList;
-import java.util.Random;
-
 import spacegamecraft.geo.Point;
 import spacegamecraft.gfx.Buffer;
 import spacegamecraft.gfx.Color;

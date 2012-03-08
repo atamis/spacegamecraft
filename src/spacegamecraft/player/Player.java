@@ -3,7 +3,6 @@ package spacegamecraft.player;
 import spacegamecraft.InputHandler;
 import spacegamecraft.geo.Point;
 import spacegamecraft.gfx.Buffer;
-import spacegamecraft.gfx.Color;
 
 public class Player {
 	public Point loc;
