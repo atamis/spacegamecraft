@@ -57,8 +57,19 @@ public class LevelGen {
 			for(int isys=0; isys<systems.size(); isys++) {
 				System sys = systems.get(isys);
 				if(!sys.owned() && rand.nextInt(EMPIRE_CHANCE) == 0) {
+					// This is the starting system of this empire.
 					empire.owned_systems.add(sys);
 					systems.get(isys).owner = empire;
+					
+					// Now we find the nearby systems.
+					for(int isys2=0; isys2<systems.size(); isys2++) {
+						System sec_system = systems.get(isys2);
+						if(sys.loc.distance(sec_system.loc) < empire.influenceDistance()) {
+							empire.owned_systems.add(sec_system);
+							sec_system.owner = empire;
+						}
+					}
+
 				}
 			}
 			empires.add(empire);
@@ -98,7 +109,7 @@ public class LevelGen {
 	}
 	
 	public static Empire generateEmpire(Random rand) {
-		return new Empire(Gpw.generate(PLANET_NAME_LENGTH, rand), Color.randColor(rand));
+		return new Empire(Gpw.generate(PLANET_NAME_LENGTH, rand), Color.randColor(rand), rand.nextInt(Empire.MAX_EMPIRE_SIZE));
 	}
 	
 	public static void main(String[] args) {
