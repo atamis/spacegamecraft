@@ -4,15 +4,30 @@ import spacegamecraft.InputHandler;
 import spacegamecraft.geo.Point;
 import spacegamecraft.gfx.Buffer;
 
+/**
+ * Currently acts as a cursor for looking at the galaxy.
+ * @author atamiser
+ *
+ */
 public class Player {
 	public Point loc;
 	public int color;
 	
+	/**
+	 * Declare a player with a location and a color
+	 * @param loc, starting location of the player
+	 * @param color, color of the player.
+	 */
 	public Player(Point loc, int color) {
 		this.loc = loc;
 		this.color = color;
 	}
 	
+	/**
+	 * Draws the player onto the buffer.
+	 * @param buf, the Buffer to draw onto.
+	 * @return the drawn on buffer.
+	 */
 	public Buffer draw(Buffer buf) {
 		try {
 			buf.pixels[loc.x][loc.y] = color;
@@ -26,6 +41,10 @@ public class Player {
 		return buf;
 	}
 	
+	/**
+	 * Obey input. Arrow keys act as they should.
+	 * @param input, the InputHandler.
+	 */
 	public void handleKey(InputHandler input) {
 		if(input.keys[39]) {
 			moveRight();

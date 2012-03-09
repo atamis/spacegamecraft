@@ -18,12 +18,15 @@ public class SpaceObject {
 		
 	}
 
+	/**
+	 * Draws this space object onto the buffer. For now, this just draws a
+	 * grey pixel at the commanded place
+	 * @param p, the point to draw at
+	 * @param buf, the buffer to draw onto.
+	 * @return, the modified buffer.
+	 */
 	public Buffer draw(Point p, Buffer buf) {
-		try {
-			buf.pixels[p.x][p.y] = 0x222222;
-		} catch (Exception e) {
-			
-		}
+		buf.set(p.x, p.y, 0x222222);
 		return buf;
 	}
 }

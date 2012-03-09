@@ -20,6 +20,11 @@ import spacegamecraft.gfx.Font;
 import spacegamecraft.player.Player;
 
 
+/**
+ * HAHAHAHAAHAHAAH. NO DOCUMENTATION FOR YOU!!!! HAHAHAHAAHAHA
+ * @author atamiser
+ *
+ */
 public class Game extends Canvas implements Runnable {
 	/**
 	 * This is really just to placate Eclipse.

@@ -27,6 +27,12 @@ public class Empire {
 	 */
 	public int size;
 
+	/**
+	 * Make an empire with no owned systems.
+	 * @param name, the name of the Empire.
+	 * @param color, the Empire's color.
+	 * @param size, the size of the empire, 0-10.
+	 */
 	public Empire(String name, int color, int size) {
 		super();
 		this.name = name;
@@ -35,6 +41,13 @@ public class Empire {
 		this.owned_systems = new ArrayList<System>();
 	}
 
+	/**
+	 * Make an empire, specifying owned systems.
+	 * @param name, name of the Empire.
+	 * @param color, the Empire's color.
+	 * @param size, the size of the Empire.
+	 * @param owned_systems, ArrayList<System> of systems owned by the Empire.
+	 */
 	public Empire(String name, int color, int size, ArrayList<System> owned_systems) {
 		super();
 		this.name = name;
@@ -43,6 +56,10 @@ public class Empire {
 		this.owned_systems = owned_systems;
 	}
 	
+	/**
+	 * The distance the sphere of influence of the Empire extends into space.
+	 * @return integer
+	 */
 	public int influenceDistance() {
 		return size * INFLUENCE_SPHERE_SCALE;
 	}

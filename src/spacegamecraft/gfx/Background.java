@@ -1,6 +1,18 @@
 package spacegamecraft.gfx;
 
+/**
+ * Quickly generates a sort of cool looking wavvy background.
+ * @author atamiser
+ *
+ */
 public class Background {
+	
+	/**
+	 * Generates a background with sin waves
+	 * @param height, height of the buffer.
+	 * @param width, width of the buffer.
+	 * @return a buffer with the background.
+	 */
 	public static Buffer generateBackground(int height, int width) {
 		Buffer b = new Buffer(height, width);
 		

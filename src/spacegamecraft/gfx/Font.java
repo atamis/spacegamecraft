@@ -11,10 +11,14 @@ import spacegamecraft.geo.Point;
 public class Font {
 	public static final int character_width = 5; // Default: 5
 	public static final int character_height = 5; // Default: 5
-	static String chars = "abcdefghijklmnopqrstuvwxyz1234567890.,!'[]";
+	public final static String chars = "abcdefghijklmnopqrstuvwxyz1234567890.,!'[]";
 	private static Font instance = null;
 	public BufferedImage fontImage;
 	
+	/**
+	 * This is necessary because Java doesn't let exception producing code
+	 * a function or constructor such as this one.
+	 */
 	private Font(){
 		try {
 			fontImage = ImageIO.read(Font.class.getResourceAsStream("/font.png"));
@@ -24,6 +28,20 @@ public class Font {
 		}
 	}
 	
+	/**
+	 * Draws the string in the given color at the given point on the given
+	 * buffer. Will obey newlines and move the "cursor" down. Please see
+	 * Font.chars for a complete alphabet of possible characters. To add
+	 * another character to the font, first draw the character at the end of
+	 * the font image, then add the character to the end of the font string.
+	 * Unrecognized characters will default to empty.
+	 * @param text, the String to draw
+	 * @param p, where you want the upper left hand corner of the message
+	 * 			(probably)
+	 * @param color, the color to draw the message in
+	 * @param pixels, the buffer to draw onto
+	 * @return the completed buffer
+	 */
 	public static Buffer drawMessage(String text, Point p, int color, Buffer pixels) {
 		String[] messages = text.split("\n");
 		for(int d = 0; d < messages.length; d++) {
@@ -89,6 +107,10 @@ public class Font {
 		return pixels;
 	}
 	
+	/**
+	 * Gets the one instance of this class.
+	 * @return an instance of Font.
+	 */
 	public static Font instance() {
 		// We have to do this weird singleton pattern thing because the font image buffer throws IO errors,
 		// and you can't catch those when assigning the image to a static field in the top level of the
