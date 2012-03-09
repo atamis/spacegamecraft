@@ -21,7 +21,7 @@ import spacegamecraft.player.Player;
 
 
 /**
- * HAHAHAHAAHAHAAH. NO DOCUMENTATION FOR YOU!!!! HAHAHAHAAHAHA
+ * Too long and too dynamic to document properly.
  * @author atamiser
  *
  */
